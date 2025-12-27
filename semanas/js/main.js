@@ -1,9 +1,11 @@
 (function ($) {
     "use strict";
     
-    // Desplazamiento
+    // Desplazamiento (Scroll)
     $(".navbar-nav a").on('click', function (event) {
-        if (this.hash !== "") {
+        // CORRECCIÓN: Verificamos que el hash no esté vacío Y que el elemento destino exista realmente en esta página.
+        // Esto permite que enlaces externos o a otras páginas (como main.html) funcionen correctamente sin error.
+        if (this.hash !== "" && $(this.hash).length) {
             event.preventDefault();
             
             $('html, body').animate({
@@ -23,10 +25,12 @@
         var typed_strings = $('.header .typed-text').text();
         var typed = new Typed('.header h2', {
             strings: typed_strings.split(', '),
-            typeSpeed: 100,
-            backSpeed: 20,
+            typeSpeed: 500, // CORRECCIÓN: Aumentado de 100 a 150 para escribir más lento
+            backSpeed: 50,  // Velocidad de borrado ajustada
             smartBackspace: false,
-            loop: true
+            loop: true,
+            backDelay: 2000, // NUEVO: Espera 2 segundos antes de borrar el texto para que se pueda leer
+            startDelay: 500  // NUEVO: Pequeña pausa antes de empezar
         });
     }
     
